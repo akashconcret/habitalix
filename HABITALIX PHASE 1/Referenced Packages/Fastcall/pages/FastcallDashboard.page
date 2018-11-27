@@ -1,0 +1,32 @@
+<apex:page showHeader="true" 
+    standardStylesheets="false" 
+    controller="FastCall.DashboardController"
+    sidebar="true" 
+    applyHtmlTag="true" 
+    applyBodyTag="false" 
+    docType="html-5.0"
+    title="Fastcall Dashboard">
+
+    <head>
+
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_dashboard.a62a77d9bab8bf546cc84ef5dde2d8de.css"/>
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_commons.aa8c9f378290e748c1d419f3e52cc852.css"/>
+    </head>
+
+    <body>
+        <!-- LOAD LIGHTNING DESIGN SYSTEM -->
+        <apex:slds />
+
+        <apex:outputPanel layout="none">
+            <apex:includeScript value="/support/console/40.0/integration.js"/>
+            <apex:includeScript value="/support/api/40.0/interaction.js"/>
+        </apex:outputPanel>
+
+        <dashboard ui-theme="{!paramTheme}"></dashboard>
+
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_vendors.2d93479fbfba576b3ab2.js"></script>
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_commons.f11a0bc5dad34a544f85.js"></script>
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_dashboard.fc07b2eb2d71beeb0de1.js"></script>
+
+    </body>
+</apex:page>

@@ -1,0 +1,74 @@
+<apex:page standardController="Task" 
+		   title="Twillio Billing Info" 
+		   extensions="FastCall.TaskCallBillingInfoController" 
+		   cache="false" 
+		   action="{!init}">
+
+<apex:stylesheet value="{!style}" />
+
+<script>
+
+	var isCall = {!isCall};
+	
+	if (!isCall) {
+		alert("This task is not a call");
+		history.go(-1);
+	}
+
+</script>
+
+<apex:outputPanel layout="none" rendered="{!isCall}">
+	<style>
+		.callInfo {
+            padding-top:5px;
+        }
+        .callInfo > div {
+        	overflow: hidden;
+        }
+        .col {
+            padding: 3px 25px;
+            font-size: 13px;
+        }
+        .col label {
+            font-size: 13px;
+            padding-left: 5px;
+            font-weight: bold;
+        }
+        .col span {
+            width: 70%;
+            float: right;
+            padding: 1px;
+        }
+        .col-one {
+            float: left;
+            width:44%;
+        }
+        .col-two {
+            float: right;
+            width: 44%;
+        }
+	</style>
+
+<apex:pageBlock title="Twillio Billing Info" mode="maindetail">
+	<apex:messages id="errors" styleClass="alert alert-error"/>
+	<apex:pageBlockSection title="Call Details" columns="2">
+	
+	     <apex:outputText label="Call SID" value="{!twillioBillingInfo.callSid}" />
+	     <apex:outputText label="Cost" value="{!twillioBillingInfo.cost}" />
+	     <apex:outputText label="Start Time" value="{!twillioBillingInfo.startTime}" />
+	     <apex:outputText label="Direction" value="{!twillioBillingInfo.direction}" />
+	     <apex:outputText label="End Time" value="{!twillioBillingInfo.endTime}" />
+	     <apex:outputText label="Duration" value="{!twillioBillingInfo.duration}" />
+	     <apex:outputText label="From" value="{!twillioBillingInfo.fromPhone}" />
+	     <apex:outputText label="To" value="{!twillioBillingInfo.toPhone}" />
+	     
+	     
+	    <div style="padding-left:30px; padding-top:20px;">
+	    	<a href="/{!targetTask.Id}">Return to task</a>
+	    </div>
+
+    </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+
+</apex:page>

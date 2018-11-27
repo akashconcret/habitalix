@@ -1,0 +1,51 @@
+<apex:page standardstylesheets="false" showheader="false" sidebar="false"
+           controller="FastCall.FastCallSoftPhoneController" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html>
+    <head>
+         <style>
+            body {
+                margin: 0px;
+                padding: 0px;
+                font-family: Arial,Helvetica,sans-serif;
+                font-size: 75%;
+                overflow: hidden;
+                background-color: #FFFFFF;
+            }
+            .visible {
+                display: block !important;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>
+        
+        <apex:outputPanel rendered="{!theme != 'Theme4d'}" layout="none">
+            <apex:includeScript value="/support/console/36.0/integration.js"/>
+            <apex:includeScript value="/support/api/36.0/interaction.js"/>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!theme == 'Theme4d'}" layout="none">
+            <apex:includeScript value="/support/api/38.0/lightning/opencti_min.js" />
+        </apex:outputPanel>
+
+        <!-- LOAD LIGHTNING DESIGN SYSTEM -->
+        <apex:slds />
+
+        <apex:stylesheet value="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" />
+
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_softphone.d4aa6e0f746c9d1a005495b5a625a7e7.css"/>
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_commons.aa8c9f378290e748c1d419f3e52cc852.css"/>
+    </head>
+    <body>
+        <!-- WIDGET --> 
+        <fc-widget is-package-context="{!isPackageContext}" ui-theme="{!theme}" slds-url="{!JSENCODE($Asset.SLDS)}"></fc-widget>
+        
+        <!-- FastCall Sofphone App Javascript Dependencies -->
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_vendors.2d93479fbfba576b3ab2.js"></script>
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_softphone_vendors.8e45fca11dc904176d50.js"></script>
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_commons.f11a0bc5dad34a544f85.js"></script>
+        <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_softphone.b3fe7e6bae58c3ccbd4d.js"></script>
+        
+    </body>
+    </html>
+</apex:page>

@@ -1,0 +1,48 @@
+<apex:page controller="FastCall.FastCallInboundCallSearchController"
+		   showHeader="false"
+		   sidebar="false"
+		   action="{!init}">
+
+<head>
+	<title>Fastcall Inbound Call Search</title>
+	<!--<apex:stylesheet value="{!css}" />
+	<script src="/support/api/29.0/interaction.js"></script>
+	<apex:repeat value="{!js}" var="file">
+		<script src="{!file}"></script>
+	</apex:repeat>
+	<script>
+		$(function () { initSearchList({!jsonRecordsList}); } );
+	</script>-->
+</head>
+
+<body>
+	<!--<apex:form >-->
+		<!-- ACTION FUNCTIONS -->
+		<!--<apex:actionFunction name="assignTaskToRecord" action="{!assignTask}" rerender="view">
+			<apex:param name="assignToRecordId" assignTo="{!assignToRecordId}" value=""/>
+		</apex:actionFunction>
+		<div class="fcSearchHead">
+			<h1 class="fcSearchTitle">FastCall search results for {!searchPhone}</h1>
+		</div>
+		<div class="bRelatedList fcListContainer">
+			<div class="bPageBlock fcListBlock">-->
+				<!-- NEW RECORD PANEL -->
+				<!--<div class="fcCreateNewRecordPanel">
+  					<apex:commandLink styleClass="btn fcBtn" title="Create Record for current call" value="Create New Record" action="{!redirectToCreateRecord}"/>		
+ 				</div>-->
+				<!-- LIST BODY -->
+				<!--<div class="pbBody">
+					<table id="fcSearchResult" class="list" border="0" cellpadding="0" cellspacing="0">
+						<tbody>
+							<tr class="headerRow">
+								<th class="zen-deemphasize assign-call-col">Assign call</th>
+								<th class="zen-deemphasize">Record Type</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</apex:form>-->
+</body>
+</apex:page>

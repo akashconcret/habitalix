@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <fullName>Assign_Task</fullName>
+        <availability>online</availability>
+        <description>Assign task to sobject based on phone number</description>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Assign Call</masterLabel>
+        <openType>newWindow</openType>
+        <page>TaskAssign</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>Billing_Info</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Billing Info</masterLabel>
+        <openType>newWindow</openType>
+        <page>TaskCallBillingInfo</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>Call_Details</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Call Details</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!IF(ISNULL(Task.CallObject), &quot;alert(&apos;This Task is not a Call&apos;)&quot;, &quot;window.open(&apos;https://www.twilio.com/console/voice/logs/calls?sid=&quot; &amp; Task.CallObject &amp; &quot;&apos;)&quot;)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Delete_Recording</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Delete Recording</masterLabel>
+        <openType>sidebar</openType>
+        <page>TaskCallRecordingDelete</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

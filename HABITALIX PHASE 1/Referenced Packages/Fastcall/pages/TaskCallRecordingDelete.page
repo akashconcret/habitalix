@@ -1,0 +1,19 @@
+<apex:page cache="false">
+
+    <apex:slds />
+
+    <div class="slds-scope">
+        <div class="slds-grid slds-wrap slds-size_1-of-1 slds-align_absolute-center slds-p-around_xx-large">
+            <apex:image url="{!URLFOR($Resource.FastCall__C2C, 'imgs/illustration-page-not-found.png')}"/>
+            <div class="slds-size_1-of-1 slds-text-align_center">
+                <h1 class="slds-text-heading_large">Page has been moved</h1>
+                <p class="slds-text-body_regular slds-m-top_small">
+                    The functionality to delete the call recording for a Fastcall call, was moved to the delete recording button on the call custom object.
+                </p>
+                <p>
+                    You can (and should) safely remove this delete recording custom button from the native Task object page layout. Read <a href="https://help.salesforce.com/articleView?id=customizing_detail_page_buttons.htm&type=5" target="_blank">here</a> for more info on customazing page buttons.
+                </p>
+            </div>
+        </div>
+    </div>
+</apex:page>

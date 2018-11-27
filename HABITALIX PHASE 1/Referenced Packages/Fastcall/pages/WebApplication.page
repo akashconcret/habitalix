@@ -1,0 +1,10 @@
+<apex:page controller="FastCall.C2CWebApplication"
+    action="{!processRequest}"
+    contentType="text/xml"
+    showHeader="false"
+    sidebar="false"
+    standardStylesheets="false"
+    setup="false"
+    cache="false">
+    {!IF(NOT(ISNULL(response)), response, '')}
+    </apex:page>

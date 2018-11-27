@@ -1,0 +1,5 @@
+<apex:page standardController="FastCall__Dial_List__c" docType="html-5.0">
+
+    <c:Dialer listId="{!FastCall__Dial_List__c.Id}" />
+
+</apex:page>

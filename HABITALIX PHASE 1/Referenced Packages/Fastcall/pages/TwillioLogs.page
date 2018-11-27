@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apex:page controller="FastCall.TwillioLogsController" 
+		   action="{!init}"
+		   showheader="false" sidebar="false" cache="false" standardstylesheets="false"
+		   contentType="application/xml">
+
+	{!xmlBody}
+
+</apex:page>

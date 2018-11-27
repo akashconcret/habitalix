@@ -1,0 +1,8 @@
+<apex:page standardController="FastCall__Call__c"
+           extensions="FastCall.EmailCallToTwilioSupportController"
+           action="{!goToEmailComposer}"
+           standardStylesheets="false"
+           showHeader="false" 
+           sidebar="false">
+    
+</apex:page>

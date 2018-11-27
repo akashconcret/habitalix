@@ -1,0 +1,197 @@
+<apex:page standardController="FastCall__Call__c" 
+           title="Assign Salesforce record to Fastcall call log" 
+           extensions="FastCall.RelateCallToRecordController"
+           action="{!main}"
+           docType="html-5.0">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">  
+
+        <body class="slds-scope">    
+
+            <apex:slds />
+            <apex:stylesheet value="{!URLFOR($Resource.FastCall__C2C, 'css/assign-page.css')}" />
+
+            <div class="slds-col slds-size--1-of-1">
+
+                <!-- header -->
+                <div class="slds-col slds-size--1-of-1">
+
+                    <div class="fc-settings-header slds-page-header">
+                        <div class="slds-grid slds-wrap slds-grid--vertical-align-center">
+                            <div class="slds-grid slds-wrap slds-grid--vertical-align-center
+                                slds-size--10-of-12 slds-medium-size--10-of-12 slds-large-size--10-of-12">
+                                <div class="slds-size--2-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                                    <span class="slds-icon_container current-record-icon background-{!currentRecordType}">
+                                        <svg aria-hidden="true" class="settings-header-icon">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#' + currentRecordType)}"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="slds-size--10-of-12 slds-medium-size--11-of-12 slds-large-size--11-of-12">
+                                    <a href="/{!currentRecordId}" target="_blank">
+                                        <p id="fc-task-assign-call-record-name"
+                                            class="fc-task-record-header slds-truncate slds-text-align--left slds-page-header__title"
+                                            title="{!currentRecordName}">{!currentRecordName}
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fc-settings-header-button slds-grid slds-wrap slds-grid--vertical-align-center slds-grid--align-end
+                                slds-size--2-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12 slds-p-right_xx-large">
+                                <button id="fc-task-assign-call-close-btn" class="slds-button">
+                                    <span class="slds-help-icon" title="Close">
+                                        <svg aria-hidden="true" class="help-icon">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <apex:form >
+                    <div class="fc-settings slds-grid slds-wrap slds-p-bottom_medium slds-p-left_large slds-p-right_large">
+
+                        <!-- Introductory Text -->
+                        <div class="fc-setting-title slds-grid slds-wrap slds-size_1-of-1 slds-p-top_large slds-p-left_small">
+                            <p class="fc-settings-box-title"
+                                title="Select Object to Assign">Select Object to Assign
+                            </p>
+                        </div>
+
+                        <!-- form -->
+                        <div class="slds-grid slds-wrap slds-size--1-of-1 slds-p-bottom_large slds-m-top--medium">
+
+                            <div class="fc-form-table slds-form slds-form_horizontal slds-grid slds-wrap slds-size--1-of-1">
+
+                                <!-- Main Record picklist-->
+                                <div class="slds-grid slds-wrap slds-grid_vertical-align-center
+                                            slds-size--1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <div class="slds-form-element slds-grid slds-wrap slds-grid_vertical-align-center
+                                                slds-size--1-of-1 slds-p-top--x-small">
+                                        <label class="slds-form-element__label">Main Record</label>
+                                        <!--input-->
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_align-end
+                                                        slds-input-has-icon slds-input-has-icon_right">
+                                                <apex:inputText value="{!searchTerm}" styleClass="fc-button-search slds-input slds-size--1-of-1">
+                                                    <apex:actionSupport event="onchange" action="{!searchByName}" rerender="recordTable"/>
+                                                </apex:inputText>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-p-top--x-small
+                                    slds-size--1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                    <apex:commandLink id="createNewRecord"
+                                                      styleClass="slds-p-top_xx-small slds-p-bottom_xx-small slds-button slds-button_neutral btnSubmit"
+                                                      action="{!createNewRecord}">
+                                        <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                                            <div>
+                                                <span class="slds-icon_container">
+                                                    <svg aria-hidden="true" class="slds-icon new-lead-icon">
+                                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#lead')}"></use>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <div class="slds-m-left--xx-small">
+                                                <p class="fc-form-button-text slds-truncate slds-text-align--left"
+                                                    title="New Lead">New Lead
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </apex:commandLink>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </apex:form>
+
+                <apex:pageBlock id="recordTable">
+                    <apex:form >
+                    <apex:pageMessages />
+                        <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-top_x-small slds-p-bottom_large slds-p-right_x-small">
+                            <div class="fc-setting-boxes fc-devices-settings slds-size_1-of-1 slds-scrollable_x">
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                    <thead>
+                                        <tr class="slds-text-title_caps fc-table-header">
+                                            <th scope="col">
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate slds-grid slds-grid--vertical-align-center"
+                                                    title="NAME">NAME
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate slds-grid slds-grid--vertical-align-center"
+                                                    title="COMPANY">COMPANY
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate slds-grid slds-grid--vertical-align-center"
+                                                    title="PHONE">PHONE
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate slds-grid slds-grid--vertical-align-center"
+                                                    title="EMAIL">EMAIL
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <apex:repeat value="{!objects}" var="item">
+                                            <tr>
+                                                <td data-label="ICON">
+                                                    <span class="slds-icon_container fc-settings-square-icon record-icon-container background-{!item.type}" 
+                                                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <svg aria-hidden="true" class="record-icon">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#' + item.type)}"></use>
+                                                        </svg>
+                                                    </span>
+                                                </td>
+                                                <td data-label="NAME" class="slds-size--3-of-12">
+                                                    <apex:outputLink value="/{!item.id}">{!item.Name}</apex:outputLink>
+                                                </td>
+                                                <td  data-label="COMPANY" class="slds-size--3-of-12">
+                                                    <div class="slds-truncate" title="{!item.companyName}">{!item.companyName}</div>
+                                                </td>
+                                                <td  data-label="PHONE" class="slds-size--3-of-12">
+                                                    <div class="slds-truncate" title="{!phoneNumber}">{!phoneNumber}</div>
+                                                </td>
+                                                <td data-label="EMAIL" class="slds-size--3-of-12">
+                                                    <div class="slds-truncate" title="{!item.Email}">{!item.Email}</div>
+                                                </td>
+                                                <td data-label="ASSIGN" class="">
+                                                    <div role="group" class="slds-grid slds-grid_align-end">
+                                                        <apex:commandLink id="assignRecord" value="" action="{!Save}">
+                                                            <apex:param name="selectedItemId"
+                                                                value="{!item.Id}"
+                                                                assignTo="{!selectedItemId}"/>
+                                                            <span class="slds-icon_container" title="Assign to Record" 
+                                                                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                <svg aria-hidden="true" class="slds-icon assign-icon">
+                                                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#preview')}"></use>
+                                                                </svg>
+                                                            </span>
+                                                        </apex:commandLink>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:form>
+                </apex:pageBlock>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,36 @@
+<apex:page controller="FastCall.FCTwilioUsageController"
+           title="Fastcall Twilio Usage">
+    <div class="content">
+        <div class="blank">&nbsp;</div>
+        <h2 class="pageDescription"> Fastcall Twilio Usage Information</h2>
+        <div class="blank">&nbsp;</div>
+    </div>
+    <apex:form id="twilioUsage">
+        <apex:pageBlock title="View call usage detail between dates" mode="edit" rendered="{!twilioUsage == null}">
+            <apex:pageMessages />
+            <apex:pageBlockSection columns="1">
+                <apex:inputText id="startDate" label="From Date" value="{!startDate}" onfocus="DatePicker.pickDate(false, this, true);"/>
+                <apex:inputText id="endDate" label="To Date" value="{!endDate}" onfocus="DatePicker.pickDate(false, this, true);"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!showUsage}" value="Show Usage" rerender="twilioUsage"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    
+    <apex:pageBlock id="usageDetails" title="Fastcall Twilio Usage" mode="edit" rendered="{!twilioUsage != null}">
+        <apex:pageBlockSection columns="1" collapsible="false">
+    
+            <apex:outputText label="Number of calls" value="{!twilioUsage.numberOfCalls}" />
+            <apex:outputText label="Number of minutes" value="{!twilioUsage.numberOfMinutes}" />
+            <apex:outputText label="Total Cost" value="{!twilioUsage.costWithUnit}" />
+
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!goBack}" value="Go Back"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    
+    </apex:form>
+    
+</apex:page>

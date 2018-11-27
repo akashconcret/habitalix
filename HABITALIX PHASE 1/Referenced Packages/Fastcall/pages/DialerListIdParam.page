@@ -1,0 +1,5 @@
+<apex:page docType="html-5.0">
+        
+    <c:Dialer listId="{!$CurrentPage.parameters.listId}"/>
+    
+</apex:page>

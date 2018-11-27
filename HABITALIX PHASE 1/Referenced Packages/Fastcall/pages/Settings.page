@@ -1,0 +1,175 @@
+<apex:page showHeader="true" 
+    standardStylesheets="false" 
+    controller="FastCall.Settings"
+    sidebar="false" 
+    applyHtmlTag="true" 
+    applyBodyTag="false" 
+    docType="html-5.0"
+    action="{!processTwilioConnect}"
+    title="Fastcall Settings">    
+
+    <head>
+        <apex:slds />
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_settings.9941a1062622f95fb31cfe0782c42d14.css"/>
+        <link rel="stylesheet" type="text/css" href="/resource/FastCall__C2C/css/fastcall_commons.aa8c9f378290e748c1d419f3e52cc852.css"/>
+    </head>
+
+    <body>
+
+        <!-- LOAD LIGHTNING DESIGN SYSTEM -->
+
+        <apex:outputPanel rendered="{!$User.UIThemeDisplayed == 'Theme3'}" layout="none">
+            <style type="text/css">
+                #fc-settings-container .fc-set-height-col {
+                    min-height: calc(100vh - 165px) !important;
+                    max-height: calc(100vh - 165px) !important;
+                }
+                td.noSidebarCell {
+                    padding: 0px !important;
+                }
+                .bodyDiv .outerNoSidebar {
+                    padding: 0px !important;
+                }
+            </style>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!$User.UIThemeDisplayed == 'Theme4d'}" layout="none">
+            <style type="text/css">
+                body {
+                    margin: 0px !important;
+                }
+
+                #fc-settings-container .fc-set-height-col {
+                    min-height: 100vh !important;
+                    max-height: 100vh !important;
+                }
+            </style> 
+        </apex:outputPanel>
+
+        <style type="text/css">
+            #fc-settings-container ul > li {
+                margin-left: 0px;
+            }
+            @-webkit-keyframes flash {
+              from {
+                opacity: 1;
+                width: 0px;
+              }
+              50% {
+                opacity: 0.7;
+                width: 140px;
+              }
+              85% {
+                opacity: 1;
+                width: 230px;
+              }
+              to {
+                opacity: 0.5;
+                width:295px;
+              }
+            }
+
+            @keyframes flash {
+              from {
+                opacity: 1;
+                width: 0px;
+              }
+              50% {
+                opacity: 0.7;
+                width: 140px;
+              }
+              85% {
+                opacity: 1;
+                width: 230px;
+              }
+              to {
+                opacity: 0.5;
+                width:295px;
+              }
+            }
+            #fc-settings-container #fc-app-preloader {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 9997;
+                background-color: #FFFFFF;
+                visibility: visible;
+                opacity: 1;
+                transition: opacity 0.2s ease, visibility 0s;
+                transition-delay: 0s, 0.3s;
+            }
+            #fc-settings-container #fc-app-preloader .fc-preloader-back {
+                position: absolute;
+                top: calc(50% - 60px);
+                left: calc(50% - 147.5px);
+                opacity: 1;
+                width: 295px;
+                height: 120px;
+            }
+            #fc-settings-container #fc-app-preloader .fc-preloader-back.back-a {
+                background-color: #483959;
+                z-index: 9998;
+            }
+            #fc-settings-container #fc-app-preloader .fc-preloader-back.back-b {
+                background-color: #E4745B;
+                width: 0px;
+                -webkit-animation: flash 2s cubic-bezier(0, 0.53, 0.93, 0.17) infinite;
+                animation: flash 2s cubic-bezier(0, 0.53, 0.93, 0.17) infinite;
+                z-index: 9999;
+            }
+            #fc-settings-container #fc-app-preloader .fc-preloader-logo {
+                position: absolute;
+                top: calc(50% - 70px);
+                left: calc(50% - 157px);
+                width: 314px;
+                height: 140px;
+                z-index: 10000;
+                background: url('data:image/png;base64,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') no-repeat;
+            }
+
+        </style>   
+
+        <!-- REQUIRED SLDS WRAPPER -->
+        <div id="fc-settings-container" class="slds-scope">
+            
+            <!-- PRELOADER -->
+            <div id="fc-app-preloader">
+                <div class="fc-preloader-back back-b"></div>
+                <div class="fc-preloader-back back-a"></div>
+                <div class="fc-preloader-logo"></div>
+            </div>
+
+            <!-- RENDER SETTINGS APP -->
+            <apex:outputPanel rendered="{!NOT(twilioConnectView)}" layout="none">
+
+                <!-- GRID -->
+                <div id="fc-settings-container" class="slds-grid slds-wrap" ng-cloak="">
+
+                    <settings-app is-package-context="{!isPackageContext}" ui-theme="{!theme}" slds-icon-url="{!URLFOR($Asset.SLDS, "")}" class="fc-set-height-col slds-size_1-of-1"></settings-app>
+
+                </div>
+
+
+                <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_vendors.2d93479fbfba576b3ab2.js"></script>
+                <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_settings_vendors.9561fd6ce415b0c916db.js"></script>
+                <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_commons.f11a0bc5dad34a544f85.js"></script>
+                <script type="text/javascript" src="/resource/FastCall__C2C/js/fastcall_settings.6a202d71d6e190c37bdd.js"></script>
+
+            </apex:outputPanel> 
+
+            <!-- TWILIO CONNECT SCRIPT -->
+            <apex:outputPanel rendered="{!twilioConnectView}" layout="none">
+                <script>
+                    window.opener.postMessage('{!JSINHTMLENCODE(twilioConnectParamsJSON)}',"*");
+                    setTimeout(function () {
+                        window.close();
+                    }, 1000);
+                </script>
+            </apex:outputPanel>
+
+        </div>
+    </body>
+    <!-- / REQUIRED SLDS WRAPPER -->
+</apex:page>
