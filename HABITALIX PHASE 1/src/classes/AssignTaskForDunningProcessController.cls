@@ -1,4 +1,3 @@
-//
 public class AssignTaskForDunningProcessController {
     
     public static String AssignTaskForDunningProcess(String dunningDetail) {
